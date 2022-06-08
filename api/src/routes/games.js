@@ -97,7 +97,33 @@ router.get('/:id' , async (req, res)=>{
         }
 });
 
+router.post('/', async (req, res)=>{
+    const { name, description, releaseDate, rating, platforms, background_image, createdDb, genres } = req.body
 
+    if (name && description && platforms) {
+        let newGame = await Videogame.create({
+            name,
+            description,
+            platforms,
+            releaseDate,
+            rating,
+            background_image,
+            genres
+        })
+        let genreDb = await Genre.findAll({
+            where: {
+                name: genres
+            }
+        })
+
+        await newGame.addGenre(genreDb)
+
+        return res.status(200).send("Peronsaje creado")
+
+    } else {
+        return res.status(404).send("Completar formulario correctamente")
+    }
+});
 
 
 module.exports = router;
