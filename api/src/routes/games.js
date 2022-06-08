@@ -9,11 +9,10 @@ const {API_KEY} = process.env;
 
 const router = Router();
 
-// https://api.rawg.io/api/games?key=4a5741eed7504c6cabbb01d54a3d32ac
-// https://api.rawg.io/api/games?search=portal&key=4a5741eed7504c6cabbb01d54a3d32ac
-// https://api.rawg.io/api/games/12020?key=4a5741eed7504c6cabbb01d54a3d32ac
-// https://api.rawg.io/api/games?search=portal&key=4a5741eed7504c6cabbb01d54a3d32ac
-// 
+// https://api.rawg.io/api/games?key=
+// https://api.rawg.io/api/games?search=portal&key=
+// https://api.rawg.io/api/games/12020?key=
+// https://api.rawg.io/api/games?search=portal&key=
 
 
 router.get('/', async(req, res)=>{
@@ -97,6 +96,7 @@ router.get('/:id' , async (req, res)=>{
             res.status(404).json('Id no encontrado')
         }
 });
+
 
 
 

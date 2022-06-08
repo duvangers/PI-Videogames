@@ -38,27 +38,6 @@ const getVideogames = async () => {
     } catch (error) {
         console.log(error)
     }
-    // try {
-    //     const games = [];
-    //         const pages = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=1`);
-    //         pages.data.results.forEach((e) => {
-    //             games.push({
-    //                 id: e.id,
-    //                 name: e.name,
-    //                 background_image: e.background_image,
-    //                 rating: e.rating,
-    //                 genres: e.genres.map(e => {
-    //                     return e.name
-    //                 }),
-    //                 platforms: e.parent_platforms.map(e => {
-    //                     return e.platform.name
-    //                 }),
-    //             })
-    //         })
-    //     return games ;
-    // } catch (error) {
-    //     console.log(error)
-    // }
 };
 
 const getDbGames = async () => {
