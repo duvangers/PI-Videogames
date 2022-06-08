@@ -9,39 +9,42 @@ const {API_KEY} = process.env;
 
 const router = Router();
 
-// https://api.rawg.io/api/games?key=
+// https://api.rawg.io/api/games?key=4a5741eed7504c6cabbb01d54a3d32ac&page_size=40
 // https://api.rawg.io/api/games?search=portal&key=
 // https://api.rawg.io/api/games/12020?key=
-// https://api.rawg.io/api/games?search=portal&key=
+// https://api.rawg.io/api/games?search=portal&key=4a5741eed7504c6cabbb01d54a3d32ac
 
 
 router.get('/', async(req, res)=>{
     const api = await allData();
     const {name}= req.query;
-
-    if(name){
-      const searchN =   await axios.get(`https://api.rawg.io/api/games?search=${name.toLowerCase()}&key=${API_KEY}&page_size=15`)
-      if(searchN){
-        const gameName = searchN.data.results.map(e=>{
-            return{
-                id: e.id,
-                name: e.name,
-                image: e.background_image,
-                rating: e.rating,
-                releaseDate: e.released,
-                platforms: e.parent_platforms.map(e => {
-                    return  e.platform.name
-                }),
-            }
-        })
-            res.status(200).json(gameName)
-      }else{
-         res.status(404).send('El juego no esta =(') 
-      }
-    }else{
-        
-        res.status(200).json(api)
+    try{
+        if(name){
+            const searchN =   await axios.get(`https://api.rawg.io/api/games?search=${name.toLowerCase()}&key=${API_KEY}&page_size=15`)
+            
+              const gameName = searchN.data.results.map(e=>{
+                  return{
+                      id: e.id,
+                      name: e.name,
+                      image: e.background_image,
+                      rating: e.rating,
+                      releaseDate: e.released,
+                      platforms: e.platforms && e.platforms.map((e) =>e.platform.name).filter((e)=>e != null).join(', '),
+                      genres: e.genres && e.genres.map((e)=>e.name).filter((e)=>e != null).join(', ')
+                  }
+              })
+              if(gameName.length > 0){
+                return res.status(200).send(gameName);
+              }else{
+                res.status(404).json('El juego no esta =(')
+              }
+        }else{
+              res.status(200).json(api)
+          }
+    }catch (err) {
+       console.log(err)
     }
+   
 });
 // https://api.rawg.io/api/games/13536?key=4a5741eed7504c6cabbb01d54a3d32ac
 router.get('/:id' , async (req, res)=>{
@@ -72,7 +75,7 @@ router.get('/:id' , async (req, res)=>{
                     platforms: x.platforms.map(e =>e.platforms).join(', '),
                     genres: x.genres.map((e)=>e.name).join(', ')
             }
-            return res.json(info)
+            return res.status(200).json(info)
         
     }else {
         
@@ -87,10 +90,10 @@ router.get('/:id' , async (req, res)=>{
                     description: x.description,
                     released: x.released,
                     rating: x.rating,
-                    platforms: x.platforms && x.platforms.map(e =>e.platforms).filter((e)=>e != null).join(', '),
+                    platforms: x.platforms && x.platforms.map((e) =>e.platform.name).filter((e)=>e != null).join(', '),
                     genres: x.genres && x.genres.map((e)=>e.name).filter((e)=>e != null).join(', ')
                 };
-                return res.json(apiData);
+                return res.status(200).json(apiData);
             }
     } catch (error) {
             res.status(404).json('Id no encontrado')
@@ -98,8 +101,8 @@ router.get('/:id' , async (req, res)=>{
 });
 
 router.post('/', async (req, res)=>{
-    const { name, description, releaseDate, rating, platforms, background_image, createdDb, genres } = req.body
-
+    const { name, description, releaseDate, rating, platforms, background_image, createdDb, genres} = req.body
+  
     if (name && description && platforms) {
         let newGame = await Videogame.create({
             name,
@@ -108,7 +111,7 @@ router.post('/', async (req, res)=>{
             releaseDate,
             rating,
             background_image,
-            genres
+            
         })
         let genreDb = await Genre.findAll({
             where: {
@@ -118,7 +121,7 @@ router.post('/', async (req, res)=>{
 
         await newGame.addGenre(genreDb)
 
-        return res.status(200).send("Peronsaje creado")
+        return res.status(200).send("Videojuego creado correctamente")
 
     } else {
         return res.status(404).send("Completar formulario correctamente")

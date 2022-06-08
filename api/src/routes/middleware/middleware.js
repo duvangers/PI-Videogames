@@ -23,12 +23,8 @@ const getVideogames = async () => {
                             id: e.id,
                             name: e.name,
                             background_image: e.background_image,
-                            genres: e.genres.map(e => {
-                                return e.name
-                            }),
-                            platforms: e.parent_platforms.map(e => {
-                                return  e.platform.name
-                            }),
+                            platforms: e.platforms && e.platforms.map((e) =>e.platform.name).filter((e)=>e != null).join(', '),
+                            genres: e.genres && e.genres.map((e)=>e.name).filter((e)=>e != null).join(', '),
                             rating: e.rating
                         }
                     }))
