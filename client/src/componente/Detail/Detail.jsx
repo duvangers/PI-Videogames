@@ -57,8 +57,8 @@ console.log(detalle)
             <h3>{detalle.genres}</h3>
         </div>
           <div>
-        <Link to={'/home'} >
-           <button >volver</button>
+           <Link to={'/home'} >
+             <button >volver</button>
            </Link>  
           </div>
            

@@ -1,9 +1,10 @@
 const { Router } = require('express');
-const { Videogame, Genre} = require('../db');
+const { Videogame, Genre, Platforms} = require('../db');
 const {allData, 
     getDbGames, 
     getVideogames} = require('./middleware/middleware')
 const axios = require('axios');
+
 const {API_KEY} = process.env;
 
 
@@ -56,13 +57,22 @@ router.get('/:id' , async (req, res)=>{
             // const arrDbInfo = await getDbGames()
             let infoDb = await Videogame.findOne({
                 where:{id},
-                include: {
-                    model: Genre,
-                    attributes: ['name'],
-                    through: {
-                        attributes: [],
+                include: [
+                    {
+                        model: Genre,
+                        attributes: ["name"],
+                        through: {
+                            attributes: []
+                        }
                     },
-                }
+                    {
+                        model: Platforms,
+                        attributes: ["name"],
+                        through: {
+                            attributes: []
+                        }
+                    }
+                ]
             });
             let x = infoDb;
             const info = {
@@ -72,7 +82,8 @@ router.get('/:id' , async (req, res)=>{
                     description: x.description,
                     released: x.released,
                     rating: x.rating,
-                    genres: x.genres.map((e)=>e.name).join(', ')
+                    genres: x.genres.map((e)=>e.name).join(', '),
+                    platforms: x.platforms.map((e)=>e.name).join(', ')
             }
             return res.status(200).json(info)
         
@@ -98,12 +109,11 @@ router.get('/:id' , async (req, res)=>{
             res.status(404).json('Id no encontrado')
         }
 });
-
 router.post('/', async (req, res)=>{
-    const { name, description, released, rating,  background_image, createdDb, genres} = req.body
-    // && platforms  
+    const { name, description, released, rating,  background_image, createdDb, genres, platforms} = req.body
     
-    if (name && description ) {
+    
+    if (name && description && platforms  ) {
         let newGame = await Videogame.create({
             name,
             description,
@@ -118,7 +128,13 @@ router.post('/', async (req, res)=>{
             }
         })
 
+        let platformDb = await Platforms.findAll({
+            where: {
+                name: platforms
+            }
+        })
         await newGame.addGenre(genreDb)
+        await newGame.addPlatforms(platformDb)
 
         return res.status(200).send("Videojuego creado correctamente")
 

@@ -1,5 +1,5 @@
 const axios = require('axios');
-const {Videogame, Genre} = require('../../db')
+const {Videogame, Genre, Platforms} = require('../../db')
 const {API_KEY} = process.env;
 
 // Me Traigo todos los 100 Videogames de la api, los mapeo y los retorno
@@ -21,7 +21,11 @@ const getVideogames = async () => {
                             id: e.id,
                             name: e.name,
                             background_image: e.background_image,
-                            platforms: e.platforms && e.platforms.map((e) =>e.platform.name).filter((e)=>e != null).join(', '),
+                            platforms: e.platforms.map(e => {
+                                return {
+                                    name: e.platform.name
+                                }
+                            }),
                             genres: e.genres.map(e => {
                                 return {
                                     name: e.name
@@ -40,13 +44,23 @@ const getVideogames = async () => {
 // Me traigo Todo los Videogames Creados de db, los mapeo y los retorno
 const getDbGames = async () => {
     let dbGamesData = await Videogame.findAll({
-        include: {
-            model: Genre,
-            attributes: ['name'],
-            through: {
-                attributes: [],
+        include: [
+            {
+                model: Genre,
+                attributes: ["name"],
+                through: {
+                    attributes: []
+                }
             },
-        },
+            {
+                model: Platforms,
+                attributes: ["name"],
+                through: {
+                    attributes: []
+                }
+            }
+        ]
+        
     });
 
     let newDataGame = dbGamesData.map((e) => {
@@ -55,11 +69,19 @@ const getDbGames = async () => {
             name: e.name,
             rating: e.rating,
             background_image: e.background_image,
-            genres: e.genres.map((e) => e.name),
+            genres:e.genres.map(e => {
+                return {
+                    name: e.name
+                }
+            }),
             description: e.description,
             released: e.released,
             createdDb: e.createdDb,
-            platforms: e.platforms,
+            platforms: e.platforms.map(e => {
+                return {
+                    name: e.platform
+                }
+            })
         };
     });
     return newDataGame;

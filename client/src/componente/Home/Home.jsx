@@ -28,15 +28,18 @@ export default function Home (){
         dispatch(getAllGames()) 
        
     },[dispatch])
-    const hadleReset= function(e){
-        e.preventDefault()
-        dispatch(getAllGames())
-    }
+    // const hadleReset= function(e){
+    //     e.preventDefault()
+    //     dispatch(getAllGames())
+    // }
  
    console.log(currentVideogames)
     return (
         <div>
-           <button type='button' onClick={hadleReset}>Reset</button>
+            <Link to={'/home'} >
+                <button >Reset</button>
+           </Link>  
+          
             <h1>VIDEOGAMES</h1>
              <Paginado 
               videogamePage={videogamePage} 
@@ -57,7 +60,7 @@ export default function Home (){
                         key={e.id}
                         name = {e.name}
                         background_image={e.background_image}
-                        genres={e.genres }
+                        genres={e.genres}
                         rating={e.rating}
                         /></Link>)
                     })
