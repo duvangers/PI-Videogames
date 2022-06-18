@@ -9,34 +9,34 @@ const {API_KEY} = process.env;
 
 const router = Router();
 
-// https://api.rawg.io/api/games?key=4a5741eed7504c6cabbb01d54a3d32ac&page_size=40
-// https://api.rawg.io/api/games?search=portal&key=
-// https://api.rawg.io/api/games/12020?key=
-// https://api.rawg.io/api/games?search=portal&key=4a5741eed7504c6cabbb01d54a3d32ac
 
 
 router.get('/', async(req, res)=>{
     const api = await allData();
     const {name}= req.query;
     try{
-        if(name){
-            const searchN =   await axios.get(`https://api.rawg.io/api/games?search=${name.toLowerCase()}&key=${API_KEY}&page_size=15`)
+        if(name && name !== ""){
+            const searchN =   await axios.get(`https://api.rawg.io/api/games?search=${name.toLowerCase()}&key=${API_KEY}`)
             
               const gameName = searchN.data.results.map(e=>{
                   return{
                       id: e.id,
                       name: e.name,
-                      image: e.background_image,
+                      background_image: e.background_image,
                       rating: e.rating,
-                      releaseDate: e.released,
+                      released: e.released,
                       platforms: e.platforms && e.platforms.map((e) =>e.platform.name).filter((e)=>e != null).join(', '),
-                      genres: e.genres && e.genres.map((e)=>e.name).filter((e)=>e != null).join(', ')
+                      genres:  e.genres.map(e => {
+                        return {
+                            name: e.name
+                        }
+                    }),
                   }
               })
               if(gameName.length > 0){
-                return res.status(200).send(gameName);
+                return res.status(200).json(gameName);
               }else{
-                res.status(404).json('El juego no esta =(')
+                res.json(['El juego no esta'])
               }
         }else{
               res.status(200).json(api)
@@ -68,11 +68,10 @@ router.get('/:id' , async (req, res)=>{
             const info = {
                     id: x.id,
                     name: x.name,
-                    image: x.background_image,
+                    background_image: x.background_image,
                     description: x.description,
                     released: x.released,
                     rating: x.rating,
-                    platforms: x.platforms.map(e =>e.platforms).join(', '),
                     genres: x.genres.map((e)=>e.name).join(', ')
             }
             return res.status(200).json(info)
@@ -86,7 +85,7 @@ router.get('/:id' , async (req, res)=>{
                 
                     id: x.id,
                     name: x.name,
-                    image: x.background_image,
+                    background_image: x.background_image,
                     description: x.description,
                     released: x.released,
                     rating: x.rating,
@@ -101,14 +100,14 @@ router.get('/:id' , async (req, res)=>{
 });
 
 router.post('/', async (req, res)=>{
-    const { name, description, releaseDate, rating, platforms, background_image, createdDb, genres} = req.body
-  
-    if (name && description && platforms) {
+    const { name, description, released, rating,  background_image, createdDb, genres} = req.body
+    // && platforms  
+    
+    if (name && description ) {
         let newGame = await Videogame.create({
             name,
             description,
-            platforms,
-            releaseDate,
+            released,
             rating,
             background_image,
             

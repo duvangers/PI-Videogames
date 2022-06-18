@@ -1,18 +1,17 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import Home from './componente/Home';
-import Landing from './componente/LandingPage';
-import Detail from './componente/Detail';
-import Create from './componente/Create';
+import Landing from './componente/LandingPage/LandingPage';
+import Detail from './componente/Detail/Detail';
+import Create from './componente/Create/Create';
 
 import './App.css';
-
+import AddFilters from './componente/AddFilters';
 function App() {
   return (
     <div className="App">
       <Route exact path='/' component={Landing}/>
-      <Route exact path='/home' component={Home}/>
-      <Route exact path='/detail' component={Detail}/>
+      <Route exact path='/home' component={AddFilters}/>
+      <Route exact path='/detail/:id' component={Detail}/>
       <Route exact path='/create' component={Create}/>
 
     </div>

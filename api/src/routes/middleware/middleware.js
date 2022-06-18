@@ -2,9 +2,8 @@ const axios = require('axios');
 const {Videogame, Genre} = require('../../db')
 const {API_KEY} = process.env;
 
-
-const getVideogames = async () => {
-    
+// Me Traigo todos los 100 Videogames de la api, los mapeo y los retorno
+const getVideogames = async () => { 
     let promises = []
     let allGames = []
     try {
@@ -13,7 +12,6 @@ const getVideogames = async () => {
                 .then((response) => {
                     return response
                 }))
-
         }
         await Promise.all(promises)
             .then((response) => {
@@ -24,7 +22,11 @@ const getVideogames = async () => {
                             name: e.name,
                             background_image: e.background_image,
                             platforms: e.platforms && e.platforms.map((e) =>e.platform.name).filter((e)=>e != null).join(', '),
-                            genres: e.genres && e.genres.map((e)=>e.name).filter((e)=>e != null).join(', '),
+                            genres: e.genres.map(e => {
+                                return {
+                                    name: e.name
+                                }
+                            }),
                             rating: e.rating
                         }
                     }))
@@ -35,7 +37,7 @@ const getVideogames = async () => {
         console.log(error)
     }
 };
-
+// Me traigo Todo los Videogames Creados de db, los mapeo y los retorno
 const getDbGames = async () => {
     let dbGamesData = await Videogame.findAll({
         include: {
@@ -56,23 +58,47 @@ const getDbGames = async () => {
             genres: e.genres.map((e) => e.name),
             description: e.description,
             released: e.released,
-            createdVideoGame: e.createdVideoGame,
+            createdDb: e.createdDb,
             platforms: e.platforms,
         };
     });
     return newDataGame;
 };
-
-const allData = async function () {  //JUNTA LAS DOS INFO
+//    Junto al Info de la api y db
+const allData = async function () {  
     const apiData = await getVideogames()
     const bdData = await getDbGames()
-    const allData = [...apiData, ...bdData]
+    const allData = apiData.concat(bdData)
     return allData
 };
 
+// Me traigo todos los Generos de la api, los mapeo, los guardo db y los retorno
+const getGenres = async function (){
+    try {
+        const genresApi = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`);
+    
+        const x = genresApi.data.results.map(e=>{
+            return {
+                name: e.name
+            }
+        })
+          
+        x.forEach(e=>{                       // Los guardo en db
+            Genre.findOrCreate({
+                where:{ name: e.name }
+            })
+        })
+        const allGenero = await Genre.findAll();
+        return allGenero;
+      } catch (error) {
+        console.log(error);
+      }
+ 
+}
 
 module.exports = {
     allData, 
     getDbGames, 
-    getVideogames
+    getVideogames,
+    getGenres
 }

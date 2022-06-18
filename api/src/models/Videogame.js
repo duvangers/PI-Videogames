@@ -26,22 +26,22 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    releaseDate:{
-      type: DataTypes.TEXT,
+    released:{
+      type: DataTypes.STRING,
     },
     rating:{
       type: DataTypes.DECIMAL,
     },
-    platforms:{
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
+    // platforms:{
+    //   type: DataTypes.STRING,
+    //   allowNull: true,
+    // },
     createdDb:{
       type:DataTypes.BOOLEAN,
       allowNull:false,
       defaultValue:true,
     },
-    image:{
+    background_image:{
       type:DataTypes.STRING,
     }
   });
