@@ -2,273 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { getGenres, postVideogame, getPlatforms} from '../../actions'
 import { useDispatch, useSelector } from 'react-redux';
+import style from './Create.module.css'
 
-// function validate(input) {
-//     let errors = {};
-//     if (!input.name) {
-//       errors.name = 'Name is required';
-//     }
-//     if (!input.rating) {
-//       errors.rating = 'Rating is required';
-  
-//     } else if (Number(input.rating)>5|| Number(input.rating)< 1 || isNaN(Number(input.rating))) {
-//       errors.rating = 'Rating is invalid';
-  
-//     }
-//     if (!input.released) {
-//       errors.released = 'Released is required';
-//     }
-//     if (!input.released) {
-//       errors.released = 'Released is required';
-//     }
-//     if (!input.description) {
-//       errors.description = 'description is required';
-//     }
-//     if(input.genres.length< 1){
-//       errors.genres= 'At least one gender'
-//     }
-//     if(input.platforms.length< 1){
-//       errors.platforms= 'At least one platform'
-//     }
-  
-//     return errors;
-//   }
-  
-  
-  
-//   export default function AddVideogame() {
-  
-//     const [errors, seterrors] = useState({
-//       name: "",
-//       released: "",
-//       rating: "",
-//       description: "",
-//       genres:"",
-//       platforms:''
-//     });
-//     const [input, setInput] = useState({
-//       name: "",
-//       released: "",
-//       rating: "",
-//       description: "",
-//       genre:'select',
-//       platform:'select'
-  
-//     });
-//     const [genres , setgenres]= useState([])
-//     const [ platforms, setplatforms]= useState([])
-  
-//     const allGenres = useSelector((state)=>state.genres)
-//     const allPlatforms = useSelector((state)=>state.platforms)
-  
-//     let dispatch = useDispatch()
-  
-//     function useFetchingWhenMount(actionCreator) {
-//        useEffect(()=>{
-//           dispatch(actionCreator())
-//        }, [actionCreator])
-//     }
-//     useFetchingWhenMount(getGenres)
-//     useFetchingWhenMount(getPlatforms)
-  
-//    const handleInputChange = function (e) {
-//     setInput({
-//       ...input,
-//       [e.target.name]: e.target.value,
-//     });
-//     seterrors(
-//       validate({
-//         ...input,
-//         genres,
-//         platforms,
-//         [e.target.name]: e.target.value,
-//       })
-//     );
-//     console.log(input);
-//   };
-  
-//    function handleSubmit(e) {
-//      e.preventDefault();
-//      if(Object.keys(errors).length==0){
-//        setInput({
-//          name: "",
-//          released: "",
-//          rating: "",
-//          description: '',
-//          background_image:''
-  
-//        });
-//        setgenres([])
-//        setplatforms([])
-//        dispatch(postVideogame({status:'added', genres, platforms, ...input}))
-//        alert(" Game added")
-//      }
-//      return 0
-  
-//    }
-//     function addGenre(e) {
-//       setgenres(Array.from(new Set([...genres, e.target.value])))
-//       seterrors(
-//         validate({
-//           ...input,
-//           genres,
-//           platforms,
-//           [e.target.name]: e.target.value,
-//         })
-//       );
-//     }
-//     function addPlatform(e) {
-//       setplatforms(Array.from(new Set([...platforms, e.target.value])))
-//       seterrors(
-//         validate({
-//           ...input,
-//           genres,
-//           platforms,
-//           [e.target.name]: e.target.value,
-//         })
-//       );
-//     }
-//    return (
-//        <div>
-//        <h1>Add VideoGame</h1>
-  
-  
-//        <form
-  
-        
-  
-//          onSubmit={handleSubmit}
-//        >
-//        <div >
-  
-//          <div>
-//            <label>Name </label>
-//            <input
-  
-//              type="text"
-//              onChange={handleInputChange}
-//              name="name"
-//              value={input.name}
-//            />
-//          </div>
-//          {errors.name && (<p> {errors.name} </p>)}
-  
-//          <div>
-//            <label>Released </label>
-//            <input
-//            placeholder={`example: 2013-12-18` }
-//              type="text"
-//              onChange={handleInputChange}
-//              name="released"
-//              value={input.released}
-//            />
-//          {errors.released && (<p> {errors.released} </p>)}
-  
-//          </div>
-  
-  
-  
-//          <div>
-//            <label>Rating </label>
-//              <input
-//              placeholder={`1 to 5 example: 3.1`}
-//                type="text"
-//                onChange={handleInputChange}
-//                name="rating"
-//                value={input.rating}
-//              />
-//            {errors.rating && (<p > {errors.rating} </p>)}
-  
-//          </div>
-//          <div>
-//            <div>
-//              <label>Description: </label>
-//            </div>
-//            <textarea
-//              name="description"
-//              value={input.description}
-//              onChange={handleInputChange}
-//              rows="6"
-//              cols="40">
-//            </textarea>
-//            {errors.description && (<p > {errors.description} </p>)}
-  
-//          </div>
-//          <div>
-//            <label>Background Image link</label>
-//              <input
-//                type="text"
-//                onChange={handleInputChange}
-//                name="background_image"
-//                value={input.background_image}
-//              />
-//          </div>
-//          <div>
-//            <label>Genres </label>
-//            <select
-//              name="genres"
-//              value= {input.genre}
-//              onChange={addGenre}
-//            >
-//              <option default value="select">select</option>
-//              {allGenres?.map((g,i)=>{
-//                return (
-//                  <option key={i} value={g.name}>{g.name}</option>
-//                )
-//              })}
-//            </select>
-//            <br/>
-  
-  
-//            {genres?.map((g,i)=>{
-//              return <span key={i}>{`"`}{g}{`" `}</span>
-//            })}
-//            {errors.genres && (<p> {errors.genres} </p>)}
-  
-  
-//          </div>
-//          <div>
-//            <label>Platforms </label>
-//            <select
-//              name="platforms"
-//             value= {input.platform}
-//              onChange={addPlatform}
-//            >
-//              <option default value="select">select</option>
-//              {
-//                allPlatforms?.map((p,i)=>{
-//                  return (
-//                    <option key={i} value={p.name}>{p.name}</option>
-//                  )
-//                })
-//              }
-//            </select>
-//            <br/>
-//            {platforms?.map((p,i)=>{
-//              return <span key={i}>{`"`}{p}{`" `}</span>
-//            })}
-//            {errors.platforms && (<p> {errors.platforms} </p>)}
-  
-//          </div>
-//          <button 
-//            type="submit"
-//            onClick={handleSubmit}
-//            name="button">
-//              Submit
-//            </button>
-//            </div>
-  
-//        </form>
-//        <Link to='/home'>
-//          <button 
-//            >
-//              Go to home
-//            </button>
-//        </Link>
-//        </div>
-//    );
-//   }
-  
 
 function validate(input) {
     let errors = {}
@@ -406,13 +141,16 @@ export default function CharacterForm() {
 
 
     return (
-        <div>
-            <h1>CREATE GAME</h1>
-            <form onSubmit={(e) => handleSubmit(e)}>
+        <div className={style.fondo}>
+            <h1>Create a New Game</h1>
+            <Link to="/home">
+                <button >Home</button>
+               </Link> 
+            <form className={style.form} onSubmit={(e) => handleSubmit(e)}>
                 <div>
-                    <label>Name</label>
+                    <label className={style.labels}>Name</label>
                     <input
-
+                        className={style.input}
                         type="text"
                         value={input.name}
                         name="name"
@@ -426,8 +164,9 @@ export default function CharacterForm() {
                 </div>
 
                 <div>
-                    <label >Rating</label>
+                    <label className={style.labels} >Rating</label>
                     <input
+                        className={style.input}
                         type="number"
                         name="rating"
                         value={input.rating}
@@ -441,8 +180,9 @@ export default function CharacterForm() {
                 </div>
 
                 <div>
-                    <label>Release Date</label>
+                    <label className={style.labels}>Release Date</label>
                     <input
+                        className={style.input}
                         type="text"
                         value={input.released}
                         name="released"
@@ -456,8 +196,9 @@ export default function CharacterForm() {
                 </div>
 
                 <div >
-                    <label>Image:</label>
+                    <label className={style.labels}>Image:</label>
                     <input
+                        className={style.input}
                         type="url"
                         name="background_image"
                         value={input.background_image}
@@ -466,8 +207,9 @@ export default function CharacterForm() {
                 </div>
 
                 <div>
-                    <label>Description</label>
+                    <label className={style.labels}>Description</label>
                     <textarea
+                     className={style.description}
                         type="text"
                         value={input.inputDescription}
                         name="description"
@@ -482,17 +224,17 @@ export default function CharacterForm() {
                 </div>
 
                 <div>
-                    <label>Platforms</label>
-                    <select onChange={(e) => handlePlatformsSelect(e)}>
+                    <label className={style.labels}>Platforms</label>
+                    <select className={style.input} onChange={(e) => handlePlatformsSelect(e)}>
                         {
                             platforms.map((e) => (
                                 <option value={e.name}> {e.name} </option>
                             ))
                         }
-                    </select>
+                    </select >
                     {input.platforms.map(e => (
                         <div>
-                            <li>{e}<button
+                            <li >{e}<button
                                 type="button"
                                 onClick={() => handlePlatformDelete(e)}
                             >X</button>
@@ -507,15 +249,15 @@ export default function CharacterForm() {
                 </div >
 
                 <div>
-                    <label>Genres</label>
-                    <select onChange={(e) => handleGenreSelect(e)}>
+                    <label className={style.labels}>Genres</label>
+                    <select  className={style.input}onChange={(e) => handleGenreSelect(e)}>
                         {
                             genres.map((e) => (
                                 <option value={e.name}> {e.name} </option>
                             ))
                         }
                     </select>
-                    <ul>
+                    <ul >
                         {input.genres.map(e => (
                             <div>
                                 <li>{e}<button
@@ -541,10 +283,9 @@ export default function CharacterForm() {
                         >ADD VIDEOGAME
                         </button>
                 }
+               
             </form>
-            <Link to="/home">
-                <button >Home</button>
-            </Link>
+            
         </div>
     )
 }

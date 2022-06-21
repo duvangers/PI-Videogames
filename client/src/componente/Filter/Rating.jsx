@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { filterRating} from '../../actions'
 import { Link } from 'react-router-dom'
+import style from './Filter.module.css'
 
 export default function RatingFilter() {
 
@@ -13,7 +14,7 @@ export default function RatingFilter() {
     }
 
     return (
-        <div>
+        <div className={style.rating}>
             <div>
                 <Link to="/create">
                     <button>CREATE GAME</button>

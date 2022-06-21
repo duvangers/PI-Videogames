@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchGame } from "../../actions"
+import styleSerch from "./SearchBar.module.css"
+
 
 export default function SearchBar() {
    
@@ -44,7 +46,7 @@ export default function SearchBar() {
             </p>
             <div>
                 <input  onChange={((e) => handleInputChange(e))} placeholder="Name..." type="text" />
-                <button  onClick={((e) => handleSubmit(e))} type="submit">Search</button>
+                <button className={styleSerch.bton} onClick={((e) => handleSubmit(e))} type="submit">Search</button>
             </div>
         </div>
     )

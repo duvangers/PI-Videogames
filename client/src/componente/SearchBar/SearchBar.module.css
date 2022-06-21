@@ -1,0 +1,8 @@
+.bton{
+    color: rgb(39, 36, 36);
+    background-color: transparent;
+    font-family: fantasy;
+    font-size: 20px;
+    cursor: pointer;
+    height: 46px;
+}

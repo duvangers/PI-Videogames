@@ -1,0 +1,29 @@
+.body{
+        width: 100%;
+       height: 100%; 
+       position: fixed;
+        top: 0;
+       left: 0;
+       z-index: -10;   
+       background-image: url('https://ceinaseg.com/wp-content/uploads/2021/09/videogames-controller-1920x1080-1.jpg');
+       background-size: contain;
+       background-repeat: no-repeat;
+       background-size: cover;
+       border: 1px solid #000;
+}
+.title{
+    font-style: italic;
+    text-shadow: 0 0 10px rgb(228, 210, 210), 0 0 20px rgb(27, 27, 27), 0 0 30px #131212, 0 0 10px #1a1819,
+    0 0 10px #252525, 0 0 10px #c0b0b8, 0 0 10px #252425;;
+    margin-bottom: 0;
+}
+.text{
+    color: black;
+    font-style: italic;
+    text-shadow: 0 0 10px rgb(228, 210, 210), 0 0 20px rgb(27, 27, 27), 0 0 30px #131212, 0 0 10px #1a1819,
+    0 0 10px #252525, 0 0 10px #c0b0b8, 0 0 10px #252425;;
+    margin-bottom: 0;
+    padding: 20px;
+    font-size: 35px;
+    padding: 347px 16px;
+}

@@ -33,7 +33,7 @@ export default function Home (){
     //     dispatch(getAllGames())
     // }
  
-   console.log(currentVideogames)
+   console.log(currentVideogames[0])
     return (
         <div>
             <Link to={'/home'} >

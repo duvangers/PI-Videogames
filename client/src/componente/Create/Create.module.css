@@ -1,0 +1,51 @@
+
+.title{
+    color: rgba(231, 224, 213, 0.788);
+}
+.form{
+    border-top: 3px solid rgb(9, 241, 40);
+    border-right-width: 3px;
+    border-bottom-width: 3px;
+    border-left-width: 3px;
+    border-radius: 0px 0px 10px 10px;
+    background-color: rgb(21, 33, 48);
+    flex-flow: column wrap;
+    width: 30%;
+    align-content: center;
+    display: inline-block;
+    position: fixed;
+    left: 33%;
+    margin-top: 7%;
+    padding: 1.5% 1.5% 3%;
+}
+.labels{
+    display: flex;
+    font-size: 14px;
+    left: 4%;
+    color: rgba(14, 248, 119, 0.829);
+    margin-top: 2%;
+}
+.input{
+    background-color: rgb(26, 36, 51);
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(142, 144, 151);
+    border-radius: 2px;
+    height: 30px;
+    width: 98%;
+    padding-left: 2%;
+    margin-top: 2%;
+    margin-bottom: 0.5%;
+    cursor: inherit;
+    line-height: inherit;
+    outline: none;
+    text-align: left;
+    vertical-align: top;
+}
+.description{
+    background-color: rgb(26, 36, 51);
+}
+.fondo{
+    background-color: rgba(17, 15, 15, 0.747);
+}
