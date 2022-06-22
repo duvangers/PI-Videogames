@@ -5,8 +5,8 @@ import { getAllGames } from "../../actions";
 import { Link } from "react-router-dom";
 import  Card  from '../Card/Card';
 import Paginado from '../Paginado/Paginado';
-import SearchBar from "../SearchBar/SearchBar";
-
+// import SearchBar from "../SearchBar/SearchBar";
+import style from "./Home.module.css"
 
 export default function Home (){
     const dispatch = useDispatch();
@@ -39,7 +39,7 @@ export default function Home (){
             <Link to={'/home'} >
                 <button >Reset</button>
            </Link>  
-          
+           
             <h1>VIDEOGAMES</h1>
              <Paginado 
               videogamePage={videogamePage} 
@@ -47,7 +47,7 @@ export default function Home (){
               paginado={paginado}
               />
               
-                <SearchBar />
+                
             {
                 currentVideogames[0] === "El juego no esta" ?   <h1> No esta</h1>
                 :
@@ -55,7 +55,7 @@ export default function Home (){
                 currentVideogames[0] ?
                  (
                     currentVideogames.map((e)=>{
-                        return(<Link to={'/detail/' + e.id}>
+                        return(<Link to={'/detail/' + e.id} style={{ textDecoration: 'none' }}>
                         <Card 
                         key={e.id}
                         name = {e.name}
@@ -64,46 +64,10 @@ export default function Home (){
                         rating={e.rating}
                         /></Link>)
                     })
-                ) : <div>Cagando...</div>
-                /* <div>
-               {
-                    currentVideogames[0] === ["El juego no esta"]?
-                   <div>
-                   {
-                       console.log(currentVideogames)
-                   } 
-                       <h1>Game not fount</h1></div>
-                 
-                   :   
-                currentVideogames?.map(e=>(
-                      <div>
-                        <Link to={'/detail/' + e.id}>
-                        <Card 
-                        key={e.id}
-                        name = {e.name}
-                        image={e.background_image}
-                        genres={e.genres}
-                        rating={e.rating}
-                        /></Link>
-                      </div>
-                ))
-               }
-            </div>  */}
+                ) : <div className={style.cargando}>Cargando ...</div>
+                }
         </div>
     )
  }
             
-    // return (
-    //     <div>
-    //         <h1> Estoy En Home</h1>
-    //         {allGames.map(e=>{
-    //                  return <Card 
-    //                             key={e.id}
-    //                             name={e.name}
-    //                             background_image={e.background_image}
-    //                             genres={e.genres}
-    //                         />
-    //              })   
-    //         }
-    //     </div>
-    // )
+  

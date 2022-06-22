@@ -1,8 +1,10 @@
 .filters{
-    display: flex;
     align-items: center;
-    justify-content:space-evenly;
+    justify-content: space-evenly;
     display: grid;
-    grid-auto-rows: 4rem;
-    grid-template-columns: repeat(auto-fit, minmax(8rem,13rem));
+    grid-auto-rows: 2rem;
+    grid-template-columns: repeat(auto-fit,minmax(8rem,13rem));
+    background-color: #08f83e;
+    padding: 20px;
+    margin: 20px 15px;
 }

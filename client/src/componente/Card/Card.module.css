@@ -1,43 +1,30 @@
-.img{
-    /* color: black;
-    display: inline-flex;
-    justify-content: space-between;
-    width: 240px;
-    min-height: 140px;
-    border-radius: 0.6rem;
-    margin: 8px;
-    box-shadow: 0.1rem 0.1rem 0.1rem #737a83ef;
-     */
-    /* color: 'black';
-    display: "inline-flex";
-    flex-direction: 'column';
-    justify-content: 'space-between';
-    width: '240px';
-    min-height: '140px';
-    border-Radius: '0.6rem';
-    margin: '8px';
-    
-    box-shadow: '0.1rem 0.1rem 0.1rem #737a83ef';
-    background-image: 'url('+props.imageLink +')'; */
-    /* background-position: 'center';
-    background-size: 'cover'; */
-}
+
 .title{
-    max-height: 40px;
-    background-color: rgba(36, 31, 31, 0.5);
-    color: white;
-    margin: 0.2rem 0.5rem 0.2rem 0.5rem;
+  background-color: #1a1a1ad4;
+  color: whitesmoke;
 }
 .card:hover {
     transform: scale(1.05);
   }
 .genres{
-    background-color: rgb(255,255,255,0.5);
-    padding: 0.1rem;
-    font-size: 1rem
+ 
+  padding: 0.1rem;
+  font-size: 1rem;
+  background-color: rgba(14, 16, 17, 0.5);
+  position: relative;
+  top: 24px;
 }
 .rating{
-  background-color: #53e2e9;
-  padding: 0.3rem;
-  border-radius: 1rem;
+    background-color: #314e0b6e;
+    padding: 0.3rem;
+    border-radius: 1rem;
+    color: yellow;
+  }
+  
+.space{
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  top: 0;
+  max-height: 40px;
 }

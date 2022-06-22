@@ -15,13 +15,13 @@ export default function RatingFilter() {
 
     return (
         <div className={style.rating}>
-            <div>
+            <div className={style.create} >
                 <Link to="/create">
-                    <button>CREATE GAME</button>
+                    <button className={style.btn} >CREATE GAME</button>
                 </Link>
             </div>
             <div>
-                <select onChange={(e) => handleFilterRating(e)} >
+                <select className={style.selc} onChange={(e) => handleFilterRating(e)} >
                     <option value="best">Best rating</option>
                     <option value="worst">Worst rating</option>
                 </select>

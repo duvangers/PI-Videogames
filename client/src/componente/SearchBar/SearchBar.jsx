@@ -44,8 +44,8 @@ export default function SearchBar() {
                     loading && loading ? <div>Searching...</div> : null
                 }
             </p>
-            <div>
-                <input  onChange={((e) => handleInputChange(e))} placeholder="Name..." type="text" />
+            <div className={styleSerch.container}>
+                <input  className={styleSerch.input}onChange={((e) => handleInputChange(e))} placeholder="Name..." type="text" />
                 <button className={styleSerch.bton} onClick={((e) => handleSubmit(e))} type="submit">Search</button>
             </div>
         </div>

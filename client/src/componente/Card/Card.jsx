@@ -3,7 +3,7 @@ import style from "./Card.module.css"
 
 export default function Card ({name, genres, background_image, rating}){
     let s ={
-    // color: 'black',
+    color: 'white',
     display: "inline-flex",
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -21,11 +21,15 @@ export default function Card ({name, genres, background_image, rating}){
     
     return (
         <div className={style.card} style={s}>
-            <h3 className={style.title}>{name}</h3>
-            <p>{genres.map(e => e.name + " / ")}</p>
-            {/* <img src ={background_image} alt='imagen' width='200px' height='300px'
-            className ={style.img}/> */}
-            <p>{rating}</p>
+            
+            <div className={style.space}>
+                <div className={style.title}>{name}</div>
+                <span className={style.rating}>{rating}</span>
+
+            </div>
+
+            <h4 className={style.genres}>{genres.map(e => e.name + " / ")}</h4>
         </div>
+
     )
 }

@@ -1,8 +1,14 @@
 .bton{
-    color: rgb(39, 36, 36);
-    background-color: transparent;
-    font-family: fantasy;
-    font-size: 20px;
-    cursor: pointer;
-    height: 46px;
+  color: black;
+  padding: 4px;
+    margin: 20px 6px;
+}
+.input{
+    padding: 4px;
+    margin: 20px 6px;
+}
+.container{
+    display: flex;
+    position: relative;
+    top: -7px;
 }

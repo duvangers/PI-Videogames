@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { filterGenre, getGenres, filterOrder } from "../../actions";
-
+import style from './Filter.module.css'
 
 export default function FilterByGenre () {
     const dispatch = useDispatch()
@@ -20,16 +20,16 @@ export default function FilterByGenre () {
     }
 console.log(genres)
     return (
-        <div>
+        <div className={style.genres}>
         <section>
-            <select name='alph' onChange={hadleFilterNameOrder}>
+            <select  className={style.selc} name='alph' onChange={hadleFilterNameOrder}>
                 <option  disabled value='none' >Select</option>
                 <option  value='asc' >A - Z</option>
                 <option  value='desc' >Z - A</option>
        </select>
 
      </section>
-            <select onChange={hadleFilterByGenre}>
+            <select className={style.selc} onChange={hadleFilterByGenre}>
                 <option value='all'>All Genres</option>
                 {
                     genres && genres.map(e =>(

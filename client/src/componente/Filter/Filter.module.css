@@ -1,3 +1,25 @@
 .rating{
-    align-items: center;
+    color: bisque;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    /* justify-content: space-evenly; */
+}
+.genres{
+    color: bisque;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: baseline;
+    /* justify-content: space-evenly; */
+}
+.selc{
+    padding: 4px;
+    margin: 20px 6px;
+}
+.create{
+   
+}
+.btn{
+    width: 113px;
+    height: 25px;
 }
