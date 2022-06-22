@@ -11,7 +11,6 @@ import style from "./Home.module.css"
 export default function Home (){
     const dispatch = useDispatch();
     const allGames = useSelector((state)=>state.games)
-    // const [message , setmessage]= useState('Loading...')
    
     const [currentPage, setCurrentPage] = useState(1)
     const[videogamePage, setVideogamePage] = useState(15)
@@ -28,41 +27,51 @@ export default function Home (){
         dispatch(getAllGames()) 
        
     },[dispatch])
-    // const hadleReset= function(e){
-    //     e.preventDefault()
-    //     dispatch(getAllGames())
-    // }
+    const hadleReset= function(e){
+        e.preventDefault()
+        dispatch(getAllGames())
+    }
  
    console.log(currentVideogames[0])
     return (
         <div>
-            <Link to={'/home'} >
-                <button >Reset</button>
-           </Link>  
+        
+                
+            
            
             <h1>VIDEOGAMES</h1>
-             <Paginado 
-              videogamePage={videogamePage} 
-              allGames={allGames.length}
-              paginado={paginado}
-              />
+                <button onClick={hadleReset}>Refresh</button>
+                <Paginado 
+                  videogamePage={videogamePage} 
+                  allGames={allGames.length}
+                  paginado={paginado}              
+                />             
               
                 
             {
-                currentVideogames[0] === "El juego no esta" ?   <h1> No esta</h1>
+                currentVideogames[0] === "El juego no esta" ?  
+                <div>
+                    <h1> No esta</h1>
+                    <button onClick={hadleReset} >Volver</button>
+                </div> 
                 :
 
                 currentVideogames[0] ?
                  (
+                    
                     currentVideogames.map((e)=>{
-                        return(<Link to={'/detail/' + e.id} style={{ textDecoration: 'none' }}>
-                        <Card 
-                        key={e.id}
-                        name = {e.name}
-                        background_image={e.background_image}
-                        genres={e.genres}
-                        rating={e.rating}
-                        /></Link>)
+                        return(
+                            
+                            <Link to={'/detail/' + e.id} style={{ textDecoration: 'none' }}>
+                            <Card 
+                            key={e.id}
+                            name = {e.name}
+                            background_image={e.background_image}
+                            genres={e.genres}
+                            rating={e.rating}
+                            /></Link>  
+                            
+                        )
                     })
                 ) : <div className={style.cargando}>Cargando ...</div>
                 }

@@ -9,32 +9,32 @@ export default function SearchBar() {
     const dispatch = useDispatch()
 
     const [name, setName] = useState("")
-    const [error, setError] = useState(false)
-    const [loading, setLoading] = useState(false)
+    // const [error, setError] = useState(false)
+    // const [loading, setLoading] = useState(false)
 
     function handleInputChange(e) {
         e.preventDefault()
-        setError(false)
+        // setError(false)
         setName(e.target.value)
     }
 
     function handleSubmit(e) {
         e.preventDefault()
-        setLoading(true) 
-        setName('')
+        // setLoading(true) 
+        // setName('')
         dispatch(searchGame(name))
-            .then(response => {
-                !response ? setError(true) : setError(false)
-                setLoading(false)
+        //     .then(response => {
+        //         !response ? setError(true) : setError(false)
+        //         setLoading(false)
                
-            })
-            .catch(error => console.log(error))
+        //     })
+        //     .catch(error => console.log(error))
            
     }
     
     return (
         <div>
-            <p >
+            {/* <p >
                 {
                     error && (
                         <div >Game not found</div>
@@ -43,7 +43,7 @@ export default function SearchBar() {
                 {
                     loading && loading ? <div>Searching...</div> : null
                 }
-            </p>
+            </p> */}
             <div className={styleSerch.container}>
                 <input  className={styleSerch.input}onChange={((e) => handleInputChange(e))} placeholder="Name..." type="text" />
                 <button className={styleSerch.bton} onClick={((e) => handleSubmit(e))} type="submit">Search</button>
