@@ -5,12 +5,12 @@ import { useParams } from "react-router"
 import { Link } from "react-router-dom";
 import { getIdGames } from "../../actions" 
 import style from "./Detail.module.css";
-// ,setiar
 
 export default function Detail (){
     const dispatch= useDispatch()
     const detalle = useSelector(state=>state.detail)
     const {id} = useParams()
+
     
     const [loading, setLoading] = useState(true);
 
@@ -18,10 +18,15 @@ export default function Detail (){
         dispatch(getIdGames(id))
          .then((response) => {
             setLoading(false);
+            
          })
-         
+        
     },[dispatch, id])
-console.log(detalle)
+console.log(detalle.createdDb)
+
+ 
+
+
    
 
         
@@ -40,10 +45,11 @@ console.log(detalle)
 
   
     return (
+        
        <div >
             <h1 className={style.title}>{detalle.name}</h1>
         <div className={style.cointainer}>
-               
+            
             <div className={style.right}>
                 <div className={style.border}>
                     <img className={style.img} src={detalle.background_image} alt='imagen' width='100%' height='520px'/> 
@@ -65,6 +71,7 @@ console.log(detalle)
             </div>
             
             <div className={style.left}>
+                <h3 className={style.subtitles}>Description:</h3>
                 <p className={style.text}>{description}</p>
                 <h3 className={style.subtitles}>Rating: </h3>
                 <h3 className={style.text}>{detalle.rating}</h3>
@@ -76,6 +83,7 @@ console.log(detalle)
            <Link to={'/home'} >
              <button className={style.btn}>volver</button>
            </Link>  
+           
           </div>
            
            

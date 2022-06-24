@@ -28,7 +28,7 @@ function validate(input) {
     } else {
         errors.platforms = ""
     }
-    if (input.genres < 1) {
+    if (input.genres < 2) {
         errors.genres = "Enter genres"
     } else {
         errors.platforms = ""
@@ -142,9 +142,12 @@ export default function CharacterForm() {
 
     return (
         <div className={style.fondo}>
-            <h1>Create a New Game</h1>
+            <div className={style.title2}>
+              <h1>Create a New Game</h1>  
+            </div>
+            
             <Link to="/home">
-                <button >Home</button>
+                <button className={style.btn} >Home</button>
                </Link> 
             <form className={style.form} onSubmit={(e) => handleSubmit(e)}>
                 <div>
@@ -158,7 +161,7 @@ export default function CharacterForm() {
                     />
                     {
                         errors.name && (
-                            <p > {errors.name} </p>
+                            <p className={style.error}> {errors.name} </p>
                         )
                     }
                 </div>
@@ -174,7 +177,7 @@ export default function CharacterForm() {
                     />
                     {
                         errors.rating && (
-                            <div> {errors.rating} </div>
+                            <div className={style.error}> {errors.rating} </div>
                         )
                     }
                 </div>
@@ -190,7 +193,7 @@ export default function CharacterForm() {
                     />
                     {
                         errors.released && (
-                            <div > {errors.released} </div>
+                            <div className={style.error}> {errors.released} </div>
                         )
                     }
                 </div>
@@ -218,7 +221,7 @@ export default function CharacterForm() {
                     />
                     {
                         errors.description && (
-                            <p > {errors.description} </p>
+                            <p className={style.error} > {errors.description} </p>
                         )
                     }
                 </div>
@@ -243,7 +246,7 @@ export default function CharacterForm() {
                     ))}
                     {
                         errors.platforms && (
-                            <p> {errors.platforms} </p>
+                            <p className={style.error}> {errors.platforms} </p>
                         )
                     }
                 </div >
@@ -270,13 +273,13 @@ export default function CharacterForm() {
                     </ul>
                     {
                         errors.genres && (
-                            <p > {errors.genres} </p>
+                            <p className={style.error}> {errors.genres} </p>
                         )
                     }
                 </div>
                 {
                     errors && (errors.name || errors.rating || errors.description || errors.genres) ?
-                        <p  >Complete Form</p>
+                        <p className={style.error} >Complete Form</p>
                         :
                         <button
                             type="submit"

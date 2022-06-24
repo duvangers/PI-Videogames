@@ -81,6 +81,7 @@ router.get('/:id' , async (req, res)=>{
                     background_image: x.background_image,
                     description: x.description,
                     released: x.released,
+                    createdDb: x.createdDb,
                     rating: x.rating,
                     genres: x.genres.map((e)=>e.name).join(', '),
                     platforms: x.platforms.map((e)=>e.name).join(', ')
@@ -142,6 +143,8 @@ router.post('/', async (req, res)=>{
         return res.status(404).send("Completar formulario correctamente")
     }
 });
+
+
 
 
 module.exports = router;

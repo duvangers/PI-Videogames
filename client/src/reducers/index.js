@@ -23,6 +23,7 @@ const rootReducer = (state=initialState, action)=> {
                 detail: action.payload
             }
         }
+     
         case "GET_GENRES":{
             return {
                 ...state,

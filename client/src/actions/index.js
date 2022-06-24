@@ -95,9 +95,12 @@ export function setiar(){
         type: 'SETIAR'
     }
 }
+
 export function postVideogame(payload) { //TRAIGO LA INFO NECESARIA PARA EL FORMULARIO DESDE EL POST DEL BACK
     return async function (dispatch) {
         const response = await axios.post("http://localhost:3001/videogames", payload)
         return response;
     }
 }
+
+

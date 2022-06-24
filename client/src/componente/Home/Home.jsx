@@ -30,9 +30,10 @@ export default function Home (){
     const hadleReset= function(e){
         e.preventDefault()
         dispatch(getAllGames())
+        setCurrentPage(1)
     }
  
-   console.log(currentVideogames[0])
+ 
     return (
         <div>
         
@@ -40,12 +41,21 @@ export default function Home (){
             
            
             <h1>VIDEOGAMES</h1>
-                <button onClick={hadleReset}>Refresh</button>
-                <Paginado 
-                  videogamePage={videogamePage} 
-                  allGames={allGames.length}
-                  paginado={paginado}              
-                />             
+               {
+                currentVideogames[0] === "El juego no esta" ? null  
+                : (
+                    <div>
+                      <Paginado 
+                        videogamePage={videogamePage} 
+                        allGames={allGames.length}
+                        paginado={paginado}              
+                        />          
+                     <button onClick={hadleReset}>Refresh</button>   
+                    </div>
+                   
+                  )
+               } 
+                  
               
                 
             {

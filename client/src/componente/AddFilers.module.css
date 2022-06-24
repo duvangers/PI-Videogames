@@ -4,7 +4,7 @@
     display: grid;
     grid-auto-rows: 2rem;
     grid-template-columns: repeat(auto-fit,minmax(8rem,13rem));
-    background-color: #08f83e;
+    background-color: rgba(128, 255, 0, 0.842);
     padding: 20px;
     margin: 20px 15px;
 }

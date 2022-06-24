@@ -1,7 +1,8 @@
 import React from "react";
 import style from "./Card.module.css"
 
-export default function Card ({name, genres, background_image, rating}){
+export default function Card ({name, genres, background_image, rating }){
+    
     let s ={
     color: 'white',
     display: "inline-flex",
@@ -17,17 +18,21 @@ export default function Card ({name, genres, background_image, rating}){
     backgroundImage: 'url('+background_image +')',
     backgroundPosition: 'center',
     backgroundSize: 'cover'
-  }    
-    
+  } 
+
+ 
+
     return (
         <div className={style.card} style={s}>
             
             <div className={style.space}>
                 <div className={style.title}>{name}</div>
                 <span className={style.rating}>{rating}</span>
+                
+          
 
             </div>
-
+            
             <h4 className={style.genres}>{genres.map(e => e.name + " / ")}</h4>
         </div>
 

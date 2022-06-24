@@ -104,7 +104,7 @@ const getGenres = async function (){
                 name: e.name
             }
         })
-          
+        // Genre.bulkCreate(x)
         x.forEach(e=>{                       // Los guardo en db
             Genre.findOrCreate({
                 where:{ name: e.name }
