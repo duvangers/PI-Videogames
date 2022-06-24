@@ -33,7 +33,7 @@ export default function SearchBar() {
         <div>
         
             <div className={styleSerch.container}>
-                <input  className={styleSerch.input} onChange={((e) => handleInputChange(e))} onKeyPress={ e=>handleOnKeyPress(e)} value={name} placeholder="Name..." type="text" />
+                <input  className={styleSerch.input} onChange={((e) => handleInputChange(e))} onKeyPress={ e=>handleOnKeyPress(e)}  placeholder="Name..." type="text" />
                 <button className={styleSerch.bton} onClick={((e) => handleSubmit(e))} type="submit">Search</button>
             </div>
         </div>
