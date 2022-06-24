@@ -5,7 +5,6 @@ import { getAllGames } from "../../actions";
 import { Link } from "react-router-dom";
 import  Card  from '../Card/Card';
 import Paginado from '../Paginado/Paginado';
-// import SearchBar from "../SearchBar/SearchBar";
 import style from "./Home.module.css"
 
 export default function Home (){
@@ -45,12 +44,13 @@ export default function Home (){
                 currentVideogames[0] === "El juego no esta" ? null  
                 : (
                     <div>
+                      <button onClick={hadleReset}>Refresh</button>
                       <Paginado 
                         videogamePage={videogamePage} 
                         allGames={allGames.length}
                         paginado={paginado}              
                         />          
-                     <button onClick={hadleReset}>Refresh</button>   
+                        
                     </div>
                    
                   )
