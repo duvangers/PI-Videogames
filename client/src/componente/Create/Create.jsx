@@ -26,10 +26,10 @@ function validate(input) {
     } else {
         errors.platforms = ""
     }
-    if (input.genres < 2) {
+    if (input.genres < 1) {
         errors.genres = "Enter genres"
     } else {
-        errors.platforms = ""
+        errors.genres = ""
     }
     return errors
 }
@@ -71,7 +71,7 @@ export default function CharacterForm() {
     function handleGenreSelect(e) {
         setInput({
             ...input,
-            genres: [...input.genres, e.target.value]
+            genres:  input.genres.includes(e.target.value)? [...input.genres] : [...input.genres, e.target.value]
         })
         setErrors(validate({
             ...input,
@@ -82,7 +82,7 @@ export default function CharacterForm() {
     function handlePlatformsSelect(e) {
         setInput({
             ...input,
-            platforms: [...input.platforms, e.target.value]
+            platforms: input.platforms.includes(e.target.value)?  [...input.platforms] : [...input.platforms, e.target.value]
         })
         setErrors(validate({
             ...input,

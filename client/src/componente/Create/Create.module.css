@@ -44,7 +44,8 @@
     vertical-align: top;
 }
 .description{
-    background-color: rgb(26, 36, 51);
+    background-color: rgba(17, 15, 15, 0.747);
+    color: aliceblue;
 }
 .fondo{
     background-color: rgba(17, 15, 15, 0.747);

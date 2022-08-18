@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { filterGenre, getGenres, filterOrder } from "../../actions";
 import style from './Filter.module.css'
+// import {setCurrentPage } from '../Home/Home'
 
-export default function FilterByGenre () {
+
+export default function FilterByGenre ({setCurrentPage}) {
     const dispatch = useDispatch()
     const genres = useSelector(state => state.genres)
 
@@ -13,7 +15,9 @@ export default function FilterByGenre () {
     }, [dispatch])
 
     const hadleFilterByGenre= function(e){
+
         dispatch(filterGenre(e.target.value))
+        setCurrentPage(1)
     }
     const hadleFilterNameOrder= function(e){
         dispatch(filterOrder(e.target.value))

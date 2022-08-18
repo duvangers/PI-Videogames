@@ -114,7 +114,7 @@ router.post('/', async (req, res)=>{
     const { name, description, released, rating,  background_image, createdDb, genres, platforms} = req.body
     
     
-    if (name && description && platforms  ) {
+    if (name && description && platforms) {
         let newGame = await Videogame.create({
             name,
             description,

@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import  Card  from '../Card/Card';
 import Paginado from '../Paginado/Paginado';
 import style from "./Home.module.css"
+import GenreByFilter from "../Filter/Genre"
+
 
 export default function Home (){
     const dispatch = useDispatch();
@@ -31,6 +33,10 @@ export default function Home (){
         dispatch(getAllGames())
         setCurrentPage(1)
     }
+    // const handleReset = function(e){
+    //     e.preventDefault()
+    //     setCurrentPage(1)
+    // }
  
  
     return (
@@ -40,6 +46,7 @@ export default function Home (){
             
            
             <h1>VIDEOGAMES</h1>
+            <GenreByFilter setCurrentPage={setCurrentPage}  />
                {
                 currentVideogames[0] === "El juego no esta" ? null  
                 : (

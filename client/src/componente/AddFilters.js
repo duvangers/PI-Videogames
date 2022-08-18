@@ -1,17 +1,14 @@
 import React from "react";
-import GenreByFilter from './Filter/Genre';
+// import GenreByFilter from './Filter/Genre';
 import DbFilter from './Filter/DB';
 import Home from "./Home/Home";
-import SearchBar from "./SearchBar/SearchBar";
+import SearchBar from "./Filter/SearchBar";
 import RatingFilter from "./Filter/Rating";
 import style from "./AddFilers.module.css";
 
 export default function AddFilters() {
     return(
         <div>
-            {/* <div>
-             <SearchBar />  
-            </div> */}
             <div className={style.filters}>
                 <div>
                 <DbFilter />  
@@ -19,9 +16,9 @@ export default function AddFilters() {
                 <div>
                 <RatingFilter />  
                 </div>
-                <div>
+                {/* <div>
                 <GenreByFilter />  
-                </div>
+                </div> */}
                 <div>
                 <SearchBar />
                 </div>
