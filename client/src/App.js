@@ -5,12 +5,12 @@ import Detail from './componente/Detail/Detail';
 import Create from './componente/Create/Create';
 
 import './App.css';
-import AddFilters from './componente/AddFilters';
+import home from "./componente/Home/Home"
 function App() {
   return (
     <div className="App">
       <Route exact path='/' component={Landing}/>
-      <Route exact path='/home' component={AddFilters}/>
+      <Route exact path='/home' component={home}/>
       <Route exact path='/detail/:id' component={Detail}/>
       <Route exact path='/create' component={Create}/>
 
